@@ -1,0 +1,118 @@
+# skillet preamble information used by panhandler
+# ---------------------------------------------------------------------
+# unique snippet name
+name: ezhi-PANOS-OSPF
+# label used for menu selection
+label: ezhi-PANOS-OSPF
+description: ezhi-PANOS-OSPF
+
+# type of device configuration
+# common types are panorama, panos, and template
+# https://github.com/PaloAltoNetworks/panhandler/blob/develop/docs/metadata_configuration.rst
+type: panos
+# preload static or default-based templates
+extends:
+
+# grouping of like snippets for dynamic menu creation in panhandler
+labels:
+  collection:
+    - ezhi-PANOS-OSPF
+
+# ---------------------------------------------------------------------
+# end of preamble section
+
+# variables section
+# ---------------------------------------------------------------------
+# variables used in the configuration templates
+# type_hint defines the form field used by panhandler
+# type_hints can be text, ip_address, or dropdown
+variables:
+  - name: vrouter_name
+    description: vrouter_name
+    default: default
+    type_hint: text
+  - name: router_id
+    description: router_id
+    default: 
+    type_hint: IP Address
+  - name: enable_ospf
+    description: enable_ospf:yes or no
+    default: 
+    type_hint: text
+  - name: allow_redistribute_default_route
+    description: allow_redistribute_default_route:yes or no
+    default: 
+    type_hint: text
+  - name: reject_default_route
+    description: reject_default_route:yes or no
+    default: 
+    type_hint: text
+  - name: rfc1583
+    description: rfc1583:yes or no
+    default: 
+    type_hint: text
+  - name: auth_profile_name
+    description: auth_profile_name
+    default: 
+    type_hint: text
+  - name: auth_passwd
+    description: auth_passwd
+    default: 
+    type_hint: text
+  - name: area_id
+    description: area_id
+    default: 
+    type_hint: IP Address
+  - name: area_type
+    description: area_type
+    default: choices
+    type_hint: dropdown
+    dd_list:
+      - key: normal
+        value: normal
+      - key: nssa
+        value: nssa
+      - key: stub
+        value: stub
+  - name: interface
+    description: interface
+    default: all
+    type_hint: dropdown
+    dd_list:
+      - key: ethernet1/1
+        value: ethernet1/1
+      - key: ethernet1/2
+        value: ethernet1/2
+      - key: ethernet1/3
+        value: ethernet1/3
+      - key: ethernet1/4
+        value: ethernet1/4
+      - key: ethernet1/5
+        value: ethernet1/5
+      - key: ethernet1/6
+        value: ethernet1/6
+      - key: ethernet1/7
+        value: ethernet1/7
+      - key: ethernet1/8
+        value: ethernet1/8
+  - name: interface_enable
+    description: interface_enable:yes or no
+    default: 
+    type_hint: text
+  - name: interface_passive_mode
+    description: interface_passive_mode:yes or no
+    default: 
+    type_hint: text
+# ---------------------------------------------------------------------
+# end of variables section
+
+# snippets section
+# ---------------------------------------------------------------------
+# snippets used for api configuration including xpath and element as file name
+# files will load in the order listed
+snippets:
+  - name: parameters
+    xpath: /config/devices/entry[@name='localhost.localdomain']/network/virtual-router
+    file: ospf_parameters.xml
+# ---------------------------------------------------------------------
+# end of snippets section
